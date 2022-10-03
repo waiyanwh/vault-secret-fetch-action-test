@@ -5,11 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
-      - name: Hello world action step
+      - name: Fetch vault secrts
         id: hello
         uses: waiyanwh/vault-secret-fetch@main
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          vault_url: "https://vault.internal-staging.opn.dev"
+          project: "opn-internal"
+          environment: "staging"
+          secrets: |
+           "foo"
+           "bar"
